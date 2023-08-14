@@ -49,7 +49,18 @@ public class PlayerMovement : MonoBehaviour
         if ((dY > 0.1f || dY < -0.1f) && canRotate)
         {
             float impulse = (Mathf.Sign(dY) * rotateBy * Mathf.Deg2Rad) * body.inertia;
-            body.AddTorque(impulse, ForceMode2D.Impulse);
+            if (body.angularVelocity >= -500f && body.angularVelocity <= 500f)
+            {
+                body.AddTorque(impulse, ForceMode2D.Impulse);
+            }
+            else if (body.angularVelocity > 500f && impulse < 0)
+            {
+                body.AddTorque(impulse, ForceMode2D.Impulse);
+            }
+            else if (body.angularVelocity < -500f  && impulse > 0)
+            {
+                body.AddTorque(impulse, ForceMode2D.Impulse);
+            }
         }
     }
 
