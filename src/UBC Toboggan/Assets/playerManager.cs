@@ -19,6 +19,7 @@ public class playerManager : MonoBehaviour
     public float jumpCost = 0.5f;
     public float deathTime = 2f;
     public float flipBonus = 5f;
+    public float airTimeMultiplier = 1f;
 
     // https://youtu.be/lKEKTWK9efE?t=336
     public GameObject floatingTextPrefab;
@@ -31,8 +32,11 @@ public class playerManager : MonoBehaviour
     float previousEulerAngle = 0f;
     float currentEulerAngle = 0f;
     float trickStartAngle = 0f;
+    float airTime = 0f;
+    int intAirTime = 0;
 
     public Animator fire;
+
 
 
     // Start is called before the first frame update
@@ -43,11 +47,6 @@ public class playerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug.Log(scoreManager.score);
-
-        // Debug.Log(transform.eulerAngles.z);
-        // Debug.Log(transform.rotation.z);
-
         if (alive) {
 
             // update current player angle
@@ -74,6 +73,14 @@ public class playerManager : MonoBehaviour
             previousEulerAngle = currentEulerAngle;
 
             // test air time
+            if (!grounded) {
+                airTime += Time.deltaTime;
+
+                if (Mathf.FloorToInt(airTime) > intAirTime) {
+                    intAirTime = Mathf.FloorToInt(airTime);
+                    handleAirTime(intAirTime);
+                }
+            }
 
             // test is a/d is pressed and rotate
             if (Input.GetButton("Horizontal"))
@@ -118,9 +125,18 @@ public class playerManager : MonoBehaviour
         showPoints(flipBonus.ToString());
     }
 
+    void handleAirTime(int seconds) {
+        // add and display points
+        float addedScore = seconds * airTimeMultiplier;
+        scoreManager.score += addedScore;
+        showPoints(addedScore.ToString());
+    }
+
     void OnTriggerEnter2D(Collider2D collider) {
         if (skiTrigger.IsTouching(collider) && collider.tag == "ground") {
             grounded = true;
+            intAirTime = 0;
+            airTime = 0f;
         }
         if (playerTrigger.IsTouching(collider) && collider.tag == "ground") {
             alive = false;
