@@ -16,6 +16,6 @@ public class destroyInSeconds : MonoBehaviour
     }
 
     void Update() {
-        transform.position = player.transform.position;
+        // transform.position = player.transform.position;
     }
 }

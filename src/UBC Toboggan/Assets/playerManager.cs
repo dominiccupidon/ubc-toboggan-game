@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 public class playerManager : MonoBehaviour
 {
@@ -24,8 +28,24 @@ public class playerManager : MonoBehaviour
     // https://youtu.be/lKEKTWK9efE?t=336
     public GameObject floatingTextPrefab;
 
+    GameObject flipBonusText;
+    GameObject airBonusText;
+
+    public AudioSource slideAudio;
+    public AudioSource windAudio;
+    public AudioSource boostAudio;
+    public AudioSource boostStartAudio;
+
+
+    float flipScore = 0f;
+    float airScore = 0f;
+    bool boosting = false;
+
     bool grounded = false;
     bool alive = true;
+    bool showingBonus = false;
+
+    float bonusCooldown = 0f;
 
     int numberOfSpins = 0;
     float angleFromStart = 0f;
@@ -42,6 +62,11 @@ public class playerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        flipBonusText = GameObject.FindGameObjectWithTag("flipBonusText");
+        airBonusText = GameObject.FindGameObjectWithTag("airBonusText");
+                    
+        flipBonusText.SetActive(false);
+        airBonusText.SetActive(false);
     }
 
     // Update is called once per frame
@@ -62,7 +87,6 @@ public class playerManager : MonoBehaviour
             }
             
             angleFromStart = numberOfSpins*360-currentEulerAngle;
-            Debug.Log(angleFromStart);
 
             // test if player flipped
             if (!grounded && Mathf.Abs(angleFromStart - trickStartAngle) >= 360) {
@@ -104,11 +128,55 @@ public class playerManager : MonoBehaviour
 
                 boostAmount -= boostPerSecond*Time.deltaTime;
                 
-                fire.SetFloat("isBoosting", 1f); // check if can make bool
+                if (boosting == false) {
+                    fire.SetFloat("isBoosting", 1f); // check if can make bool
+                    boostAudio.Play();
+                    boostStartAudio.Play();
+                    boosting = true;
+                }
             }
             else {
-                fire.SetFloat("isBoosting", 0f);
+                if (boosting == true) {
+                    fire.SetFloat("isBoosting", 0f);
+                    boostAudio.Stop();
+                    boostStartAudio.Stop();
+                    boosting = false;
+                }
             }
+            
+            // begin showing score text when a point is gained in the air
+            if (!grounded && !showingBonus && (flipScore > 0f || airScore > 0f)) {
+                updateFlipText();
+                updateAirText();
+
+                flipBonusText.SetActive(true);
+                airBonusText.SetActive(true);
+                showingBonus = true;
+            }
+            
+            // handle removing the bonus text if player is on ground for x seconds
+            if (showingBonus && grounded) {
+                bonusCooldown += Time.deltaTime;
+                
+                if (bonusCooldown > 0.25) {
+                    showingBonus = false;
+
+                    scoreManager.score += airScore;
+                    scoreManager.score += flipScore;
+
+                    flipScore = 0f;
+                    airScore = 0f;
+                    
+                    flipBonusText.SetActive(false);
+                    airBonusText.SetActive(false);
+                }
+
+            }
+            // update audio levels based on velocity
+            if (grounded) {
+                slideAudio.volume = rb.velocity.magnitude/100f;
+            }
+            windAudio.volume = rb.velocity.magnitude/50f+0.1f;
         }
         // if died wait a bit and respawn after specified delay
         else {
@@ -121,15 +189,23 @@ public class playerManager : MonoBehaviour
     }
 
     void Flipped() {
-        scoreManager.score += flipBonus;
-        showPoints(flipBonus.ToString());
+        flipScore += flipBonus;
+        updateFlipText();
     }
 
     void handleAirTime(int seconds) {
         // add and display points
         float addedScore = seconds * airTimeMultiplier;
-        scoreManager.score += addedScore;
-        showPoints(addedScore.ToString());
+        airScore += addedScore;
+        updateAirText();
+    }
+
+    void updateFlipText() {
+        flipBonusText.GetComponent<Text>().text = "Flip Bonus: +" + flipScore.ToString();
+    }
+
+    void updateAirText() {
+        airBonusText.GetComponent<Text>().text = "Air Bonus: +" + airScore.ToString();
     }
 
     void OnTriggerEnter2D(Collider2D collider) {
@@ -137,6 +213,8 @@ public class playerManager : MonoBehaviour
             grounded = true;
             intAirTime = 0;
             airTime = 0f;
+            slideAudio.volume = 0f;
+            slideAudio.Play();
         }
         if (playerTrigger.IsTouching(collider) && collider.tag == "ground") {
             alive = false;
@@ -149,6 +227,9 @@ public class playerManager : MonoBehaviour
         if (!skiTrigger.IsTouching(collider) && collider.tag == "ground") {
             grounded = false;
             trickStartAngle = angleFromStart;
+            
+            bonusCooldown = 0f;
+            slideAudio.Stop();
         }
     }
 
@@ -165,10 +246,10 @@ public class playerManager : MonoBehaviour
         }
     }
 
-    void showPoints(string text) {
-        if (floatingTextPrefab) {
-            GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
-            prefab.GetComponentInChildren<TextMesh>().text = text;
-        }
-    }
+    // void showPoints(string text) {
+    //     if (floatingTextPrefab) {
+    //         GameObject prefab = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity);
+    //         prefab.GetComponentInChildren<TextMesh>().text = text;
+    //     }
+    // }
 }
