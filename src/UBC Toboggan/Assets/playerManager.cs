@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -35,6 +34,9 @@ public class playerManager : MonoBehaviour
     public AudioSource windAudio;
     public AudioSource boostAudio;
     public AudioSource boostStartAudio;
+    public AudioSource pointsAudio;
+    public AudioSource jumpAudio;
+
 
 
     float flipScore = 0f;
@@ -64,7 +66,7 @@ public class playerManager : MonoBehaviour
     {
         flipBonusText = GameObject.FindGameObjectWithTag("flipBonusText");
         airBonusText = GameObject.FindGameObjectWithTag("airBonusText");
-                    
+
         flipBonusText.SetActive(false);
         airBonusText.SetActive(false);
     }
@@ -119,12 +121,14 @@ public class playerManager : MonoBehaviour
                     rb.AddRelativeForce(Vector3.up * jumpThrust);
 
                     boostAmount -= jumpCost;
+
+                    jumpAudio.Play();
                 }
             }
             // test if space is pressed and handle boost
             if (Input.GetButton("Jump") && boostAmount > 0)
             {
-                rb.AddRelativeForce(Vector3.right * thrust);
+                rb.AddRelativeForce(Vector3.right * thrust * Time.deltaTime);
 
                 boostAmount -= boostPerSecond*Time.deltaTime;
                 
@@ -170,8 +174,8 @@ public class playerManager : MonoBehaviour
                     flipBonusText.SetActive(false);
                     airBonusText.SetActive(false);
                 }
-
             }
+
             // update audio levels based on velocity
             if (grounded) {
                 slideAudio.volume = rb.velocity.magnitude/100f;
@@ -191,6 +195,7 @@ public class playerManager : MonoBehaviour
     void Flipped() {
         flipScore += flipBonus;
         updateFlipText();
+        pointsAudio.Play();
     }
 
     void handleAirTime(int seconds) {
@@ -198,6 +203,7 @@ public class playerManager : MonoBehaviour
         float addedScore = seconds * airTimeMultiplier;
         airScore += addedScore;
         updateAirText();
+        pointsAudio.Play();
     }
 
     void updateFlipText() {

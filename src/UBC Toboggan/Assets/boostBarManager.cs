@@ -9,12 +9,6 @@ public class boostBarManager : MonoBehaviour
     public float yOffset = 0f;
     public float xOffset = 0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
