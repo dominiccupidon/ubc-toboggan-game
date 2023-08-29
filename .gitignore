@@ -4,6 +4,7 @@
 
 # Windows specific
 
+
 # Everything past this point lists what should be ignored in a Unity project.
 # Taken from: https://github.com/github/gitignore/blob/main/Unity.gitignore
 src/UBC Toboggan/[Ll]ibrary/
