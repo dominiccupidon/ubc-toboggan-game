@@ -37,6 +37,8 @@ public class playerManager : MonoBehaviour
     
     public Animator fire;
 
+    UIManager manager;
+
     bool boosting = false;
     bool alive = true;
     int numberOfSpins = 0;
@@ -52,6 +54,8 @@ public class playerManager : MonoBehaviour
     {
         scoreManagerScript = scoreSystem.GetComponent<scoreManager>();
         soundManagerScript = soundSystem.GetComponent<soundManager>();
+
+        manager = GetComponentInParent<UIManager>();
     }
 
     // Update is called once per frame
@@ -134,15 +138,6 @@ public class playerManager : MonoBehaviour
                 }
             }
         }
-
-        // if died wait and respawn after specified delay
-        else {
-            deathTime -= Time.deltaTime;
-            
-            if (deathTime <= 0) {
-                SceneManager.LoadScene("Farm");
-            }
-        }
     }
 
     // handles collisions with landing on the ground or getting killed by ground
@@ -158,6 +153,7 @@ public class playerManager : MonoBehaviour
             alive = false;
             fire.SetFloat("isBoosting", 0f);
             boostAmount = 0f;
+            StartCoroutine(LoadGameOverScreen());
         }
     }
     
@@ -183,5 +179,11 @@ public class playerManager : MonoBehaviour
         else {
             return false;
         }
+    }
+
+    private IEnumerator LoadGameOverScreen()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        manager.ShowGameOverScreen();
     }
 }

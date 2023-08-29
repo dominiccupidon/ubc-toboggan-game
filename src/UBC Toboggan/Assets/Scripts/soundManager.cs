@@ -17,7 +17,8 @@ public class soundManager : MonoBehaviour
     Rigidbody2D rb;
     playerManager playerManagerScript;
 
-    float volumeMultiplier = 1f;
+    float savedEffectVolume = 1f;
+    float effectVolumeBeforePause = 1f;
 
     void Start() {
         rb = player.GetComponent<Rigidbody2D>();
@@ -27,9 +28,9 @@ public class soundManager : MonoBehaviour
     void Update() {
     // update audio levels based on velocity
         if (playerManagerScript.grounded) {
-            effectSources[slideIndex].volume = rb.velocity.magnitude/100f*volumeMultiplier;
+            effectSources[slideIndex].volume = rb.velocity.magnitude/100f*savedEffectVolume;
         }
-        effectSources[windIndex].volume = (rb.velocity.magnitude/50f+0.1f)*volumeMultiplier;
+        effectSources[windIndex].volume = (rb.velocity.magnitude/50f+0.1f)*savedEffectVolume;
     }
 
     public void playSound(AudioSource sound) {
@@ -48,12 +49,19 @@ public class soundManager : MonoBehaviour
     // float 0 to 1
     public void changeEffectVolume(float value) {
         for (int i = 0; i < effectSources.Length; i++) {
-            if (i != windIndex && i != slideIndex) {
-                effectSources[i].volume = effectDefaultVolumes[i]*value;
-            }
+            effectSources[i].volume = effectDefaultVolumes[i]*value;
         }
 
-        volumeMultiplier = value;
+        savedEffectVolume = value;
+    }
+
+    public void pauseEffects() {
+        effectVolumeBeforePause = savedEffectVolume;
+        changeEffectVolume(0f);
+    }
+
+    public void playEffects() {
+        changeEffectVolume(effectVolumeBeforePause);
     }
 
     // float 0 to 1
