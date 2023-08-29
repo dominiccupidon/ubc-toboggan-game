@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     public float boostSpeed;
     public float boostTime;
     public float rotateBy;
+    UIManager manager;
     Timer boostTimer;
     float dX;
     float dY;
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         boostTimer = new Timer(boostTime);
+        manager = GetComponentInParent<UIManager>();
         jumpSpeed = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * body.gravityScale));
     }
 
@@ -85,6 +87,10 @@ public class PlayerMovement : MonoBehaviour
             boostTimer.pauseTimer();
             canJump = false;
             canRotate = false;
+            if (!collider.isTrigger)
+            {
+                StartCoroutine(LoadGameOverScreen());
+            }
         } else if (touchingGroundTrigger.IsTouching(collider))
         {
             canJump = true;
@@ -104,5 +110,11 @@ public class PlayerMovement : MonoBehaviour
             canJump = false;
             canRotate = true;
         }
+    }
+
+    private IEnumerator LoadGameOverScreen()
+    {
+        yield return new WaitForSecondsRealtime(1.0f);
+        manager.ShowGameOverScreen();
     }
 }
