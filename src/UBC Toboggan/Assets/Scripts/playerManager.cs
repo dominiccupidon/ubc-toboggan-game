@@ -183,6 +183,7 @@ public class playerManager : MonoBehaviour
 
     private IEnumerator LoadGameOverScreen()
     {
+        Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(1.0f);
         manager.ShowGameOverScreen();
     }

@@ -18,7 +18,7 @@ public class FinishLine : MonoBehaviour
 
     private IEnumerator LoadScene()
     {
-        yield return new WaitForSecondsRealtime(3.0f);
+        yield return new WaitForSecondsRealtime(0.5f);
         UIManager manager = GetComponentInParent<UIManager>();
         manager.ShowResultsScreen();
     }

@@ -37,14 +37,18 @@ public class UIManager : MonoBehaviour
             TogglePauseMenu();
        }
        
-       if (gameOverScreen.activeInHierarchy || pauseMenu.activeInHierarchy)
+       if (gameOverScreen.activeInHierarchy || pauseMenu.activeInHierarchy || resultsScreen.activeInHierarchy)
        {
            if (Input.GetKeyDown(KeyCode.Q))
            {
-                QuitGame();
+                // QuitGame();
+                Time.timeScale = 1f;
+                SceneManager.LoadScene("HomeScreen");
            } else if (Input.GetKeyDown(KeyCode.R))
            {
-                StartCoroutine(RestartGame());
+                // StartCoroutine(RestartGame());
+                Time.timeScale = 1f;
+                SceneManager.LoadScene("Farm");
            }
         }
     }
