@@ -25,6 +25,8 @@ public class scoreManager : MonoBehaviour
         flipBonusText.SetActive(false);
         airBonusText.SetActive(false);
 
+        score = 0;
+
         playerManagerScript = player.GetComponent<playerManager>();
     }
 
