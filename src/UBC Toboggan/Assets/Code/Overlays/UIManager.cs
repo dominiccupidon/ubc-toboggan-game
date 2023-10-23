@@ -17,10 +17,16 @@ public class UIManager : MonoBehaviour
     public GameObject finalScore;
     public GameObject flipBonus;
     public GameObject airTimeBonus;
+    private GameObject controlsButton;
+    private GameObject audioButton;
 
     // Start is called before the first frame update
     void Start()
     {
+       controlsButton = pauseMenu.transform.GetChild(1).gameObject;
+       audioButton = pauseMenu.transform.GetChild(2).gameObject;
+       controlsButton.SetActive(false);
+       audioButton.SetActive(false);
        pauseMenu.SetActive(false);
        gameOverScreen.SetActive(false);
        resultsScreen.SetActive(false);
@@ -32,7 +38,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Escape))
+       if (Input.GetKeyDown(KeyCode.Return))
        {
             isPaused = !isPaused;
             TogglePauseMenu();

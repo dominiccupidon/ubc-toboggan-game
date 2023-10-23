@@ -9,7 +9,7 @@ public class PauseMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       controlsTab.SetActive(false);
+       controlsTab.SetActive(true);
        audioTab.SetActive(false); 
     }
     
