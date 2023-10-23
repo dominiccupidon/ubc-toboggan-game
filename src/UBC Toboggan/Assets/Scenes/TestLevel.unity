@@ -1110,6 +1110,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: paralax
       objectReference: {fileID: 0}
+    - target: {fileID: 8529079002742009113, guid: fe61b8bec3ce7c447a060ace872058a2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe61b8bec3ce7c447a060ace872058a2, type: 3}
 --- !u!1 &699536601
