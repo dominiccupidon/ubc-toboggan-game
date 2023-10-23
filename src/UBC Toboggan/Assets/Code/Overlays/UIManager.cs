@@ -8,10 +8,15 @@ public class UIManager : MonoBehaviour
 {
     private bool isPaused = false;
     private bool isFinalResultsScreen = false;
+    private bool isFlipBonusShowing = false;
+    private bool isAirTimeBonusShowing = false;
     public GameObject timer;
     public GameObject pauseMenu;
     public GameObject gameOverScreen;
     public GameObject resultsScreen;
+    public GameObject finalScore;
+    public GameObject flipBonus;
+    public GameObject airTimeBonus;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +68,20 @@ public class UIManager : MonoBehaviour
             Time.timeScale = isPaused ? 0f : 1f;
             pauseMenu.SetActive(isPaused);
             timer.SetActive(!isPaused);
+
+            if (isPaused) {
+                isFlipBonusShowing = flipBonus.activeInHierarchy;
+                isAirTimeBonusShowing = airTimeBonus.activeInHierarchy;
+                finalScore.SetActive(false);
+                flipBonus.SetActive(false);
+                airTimeBonus.SetActive(false);
+            } else {
+                finalScore.SetActive(true);
+                Debug.Log(isFlipBonusShowing);
+                Debug.Log(isAirTimeBonusShowing);
+                flipBonus.SetActive(isFlipBonusShowing);
+                airTimeBonus.SetActive(isAirTimeBonusShowing);
+            }
         }
     }
 
@@ -87,7 +106,8 @@ public class UIManager : MonoBehaviour
     
     private IEnumerator RestartGame()
     {
-        yield return new WaitForSecondsRealtime(3.0f);
+        // Set timer back to 3 secs in full game
+        yield return new WaitForSecondsRealtime(0f);
         Time.timeScale = 1f;
         pauseMenu.SetActive(false);
         gameOverScreen.SetActive(false);

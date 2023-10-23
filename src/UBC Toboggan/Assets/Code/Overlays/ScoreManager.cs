@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class scoreManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
     public static float score = 0f;
     
@@ -19,20 +19,20 @@ public class scoreManager : MonoBehaviour
     float airScore = 0f;
     bool showingBonus = false;
 
-    playerManager playerManagerScript;
+    PlayerMovement playerMovement;    
 
     void Start() {
         flipBonusText.SetActive(false);
         airBonusText.SetActive(false);
 
-        playerManagerScript = player.GetComponent<playerManager>();
+        playerMovement = player.GetComponent<PlayerMovement>();    
     }
 
     void Update() {
         scoreText.text = score.ToString();
 
         // begin showing score text when a point is gained in the air
-        if (!playerManagerScript.grounded && !showingBonus && (flipScore > 0f || airScore > 0f)) {
+        if (playerMovement.isInAir && !showingBonus && (flipScore > 0f || airScore > 0f)) {
             updateFlipText();
             updateAirText();
 
@@ -42,7 +42,7 @@ public class scoreManager : MonoBehaviour
         }
         
         // handle removing the bonus text if player is on ground for x seconds
-        if (showingBonus && playerManagerScript.grounded) {
+        if (showingBonus && !playerMovement.isInAir) {
             showingBonus = false;
 
             score += airScore;

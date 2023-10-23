@@ -78,3 +78,6 @@ src/UBC Toboggan/[Aa]ssets/[Ss]treamingAssets/aa/*
 
 # Exported Sprite work
 sprites/exports/*
+
+# Vim Files
+*.swp

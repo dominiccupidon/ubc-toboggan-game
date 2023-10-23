@@ -30,7 +30,7 @@ public class playerManager : MonoBehaviour
     public AudioSource jumpAudio;
 
     public GameObject scoreSystem;
-    scoreManager scoreManagerScript;
+    // scoreManager scoreManagerScript;
 
     public GameObject soundSystem;
     soundManager soundManagerScript;
@@ -50,7 +50,7 @@ public class playerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        scoreManagerScript = scoreSystem.GetComponent<scoreManager>();
+        // scoreManagerScript = scoreSystem.GetComponent<scoreManager>();
         soundManagerScript = soundSystem.GetComponent<soundManager>();
     }
 
@@ -75,7 +75,7 @@ public class playerManager : MonoBehaviour
             // handle flips
             if (!grounded && Mathf.Abs(angleFromStart - trickStartAngle) >= 360) {
                 trickStartAngle = angleFromStart;
-                scoreManagerScript.addFlipScore();
+                // scoreManagerScript.addFlipScore();
                 soundManagerScript.playSound(pointsAudio);
             }
 
@@ -87,7 +87,7 @@ public class playerManager : MonoBehaviour
 
                 if (Mathf.FloorToInt(airTime) > intAirTime) {
                     intAirTime = Mathf.FloorToInt(airTime);
-                    scoreManagerScript.addAirTimeScore(intAirTime);
+                    // scoreManagerScript.addAirTimeScore(intAirTime);
                     soundManagerScript.playSound(pointsAudio);
                 }
             }

@@ -19,9 +19,9 @@ public class boostLevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     { 
-        playerManager playerManagerScript = player.GetComponent<playerManager>();
-        float boostAmount = playerManagerScript.boostAmount;
-        float maxBoost = playerManagerScript.maxBoost;
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();   
+        float boostAmount = playerMovement.boost.secondsRemaining;
+        float maxBoost = playerMovement.boost.maxTime;
         float boostBarOffset = minBoostPosition * (1-boostAmount/maxBoost);
         Vector3 newPos = new Vector3(boostBar.position.x, boostBar.position.y + boostBarOffset, transform.position.z);
         transform.position = newPos;

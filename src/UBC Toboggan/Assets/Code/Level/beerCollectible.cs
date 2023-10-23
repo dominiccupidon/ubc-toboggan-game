@@ -29,10 +29,10 @@ public class beerCollectible : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collider) {
 
-        playerManager playerManager = collider.GetComponent<playerManager>();
+        PlayerMovement playerMovement = collider.GetComponent<PlayerMovement>();
 
-        if (playerManager != null && !collected) {
-            if (playerManager.collectBeer(amount)) {
+        if (playerMovement != null && !collected) {
+            if (playerMovement.collectBeer(amount)) {
                 gameObject.SetActive(false);
                 collected = true;
             }
