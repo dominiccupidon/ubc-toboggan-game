@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
             TogglePauseMenu();
        }
        
-       if (gameOverScreen.activeInHierarchy || pauseMenu.activeInHierarchy)
+       if (gameOverScreen.activeInHierarchy || pauseMenu.activeInHierarchy || resultsScreen.activeInHierarchy)
        {
            if (Input.GetKeyDown(KeyCode.Q))
            {
@@ -93,21 +93,21 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
-        if (!resultsScreen.activeInHierarchy)
-        {    
-            Time.timeScale = 0f;
-            gameOverScreen.SetActive(true);
-            timer.SetActive(false);
-        }
+        Time.timeScale = 0f;
+        gameOverScreen.SetActive(true);
+        timer.SetActive(false);
     }
 
     public void ShowResultsScreen()
     {
         // Create a enum for all the tags in the project
-        resultsScreen.SetActive(true);
-        GameObject restartOrQuitPrompt = GameObject.Find("Prompt - Q,R");
-        restartOrQuitPrompt.SetActive(isFinalResultsScreen);
-        timer.SetActive(false);
+        if (!gameOverScreen.activeInHierarchy)
+        {
+            resultsScreen.SetActive(true);
+            GameObject restartOrQuitPrompt = GameObject.Find("Prompt - Q,R");
+            restartOrQuitPrompt.SetActive(isFinalResultsScreen);
+            timer.SetActive(false);
+        }
     }
     
     private IEnumerator RestartGame()

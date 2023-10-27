@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -9, y: -202}
+  m_AnchoredPosition: {x: 1, y: -259}
   m_SizeDelta: {x: 240.13, y: 56.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &33556142
@@ -426,7 +426,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.399994, y: -41}
+  m_AnchoredPosition: {x: -8, y: 100}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &550162715
@@ -539,7 +539,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 8, y: -113}
+  m_AnchoredPosition: {x: 13, y: -150}
   m_SizeDelta: {x: 300, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569382846
@@ -776,7 +776,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 17, y: -43}
+  m_AnchoredPosition: {x: 22.000053, y: -80.00003}
   m_SizeDelta: {x: 986.5, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1309497733
@@ -1033,7 +1033,8 @@ MonoBehaviour:
     anim=\"0,2,3\"></voffset></size> Boost <pos=50%><size=200%><voffset=-0.2em><sprite=\"W\"
     anim=\"0,2,3\"></voffset></size> Rotate Clockwise\n<pos=5%><size=200%><voffset=-0.2em><sprite=\"SPACE\"
     anim=\"0,2,3\"></voffset></size> Jump <pos=50%><size=200%><voffset=-0.2em><sprite=\"S\"
-    anim=\"0,2,3\"></voffset></size> Rotate AntiClockwise\n\n"
+    anim=\"0,2,3\"></voffset></size> Rotate AntiClockwise\n\n<pos=5%><size=200%><voffset=-0.2em><sprite=\"ENTER\"
+    anim=\"0,2,3\"></voffset></size> Pause Game\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
   m_sharedMaterial: {fileID: -6895305332576258905, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
@@ -1191,10 +1192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1259,7 +1260,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: -0}
+  m_AnchoredPosition: {x: 12, y: -58}
   m_SizeDelta: {x: 848, y: 798.8278}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1863319627
