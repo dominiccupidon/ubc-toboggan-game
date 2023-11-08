@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -49,6 +50,8 @@ public class playerManager : MonoBehaviour
     float airTime = 0f;
     int intAirTime = 0;
 
+    public static Vector2 speedSave = new Vector2(0,0);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,12 +59,15 @@ public class playerManager : MonoBehaviour
         soundManagerScript = soundSystem.GetComponent<soundManager>();
 
         manager = GetComponentInParent<UIManager>();
+        
+        rb.velocity = speedSave;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (alive) {
+            speedSave = rb.velocity;
             // update current player angle
             currentEulerAngle = transform.eulerAngles.z;
             // test for player passing the 360 mark
