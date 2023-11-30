@@ -15,7 +15,7 @@ public class FinishLine : MonoBehaviour
     float fadeAmount = 0f;
     float fadeTime = 0.25f;
     float fadeDelay = 0.25f;
-    bool startingFade = true;
+    bool showLevelStartFade = true;
     float timer = 0.25f;
     float transitionTime = 5f;
 
@@ -27,18 +27,18 @@ public class FinishLine : MonoBehaviour
     }
 
     void Update() {
-        if (startingFade) {
+        if (showLevelStartFade) { 
             timer -= Time.deltaTime;
             fadeAmount = timer / fadeTime;
             if (timer <= 0) {
                 timer = 0;
                 fadeAmount = 0f;
-                startingFade = false;
+                showLevelStartFade = false;
             }
             blackRenderer.color = new Color(1f,1f,1f, fadeAmount);
         }
-        if (levelEndTriggered) {
-            if (Time.timeScale == 0f) {
+        else if (levelEndTriggered) {
+            if (Time.timeScale == 0f) { // find actual problem here
                 Time.timeScale = 1f;
             }
             timer += Time.deltaTime;
@@ -50,8 +50,6 @@ public class FinishLine : MonoBehaviour
             }
             
             blackRenderer.color = new Color(1f,1f,1f, fadeAmount);
-
-            Debug.Log(timer);
             if (timer > transitionTime) {
                 SceneManager.LoadScene("Farm2");
             }

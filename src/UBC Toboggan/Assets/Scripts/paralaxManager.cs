@@ -22,17 +22,6 @@ public class paralaxManager : MonoBehaviour
             paralaxOffset += resetDistance;
         }
 
-        // if (paralaxOffset >= resetDistance) {
-        //     float diff = paralaxOffset - resetDistance;
-        //     paralaxOffset -= (diff + 1);
-        // }
-
-        // if (paralaxOffset < 0) {
-        //     float diff = 0 - paralaxOffset;
-        //     diff = resetDistance > (diff + 1) ? resetDistance : diff + 1;
-        //     paralaxOffset += diff;
-        // }
-
         Vector3 newPos = new Vector3(cam.position.x - paralaxOffset, cam.position.y,transform.position.z);
         transform.position = newPos;
     }

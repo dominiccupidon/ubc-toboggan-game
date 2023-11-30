@@ -35,9 +35,6 @@ public class scoreManager : MonoBehaviour
 
         // begin showing score text when a point is gained in the air
         if (!playerManagerScript.grounded && !showingBonus && (flipScore > 0f || airScore > 0f)) {
-            updateFlipText();
-            updateAirText();
-
             flipBonusText.SetActive(true);
             airBonusText.SetActive(true);
             showingBonus = true;

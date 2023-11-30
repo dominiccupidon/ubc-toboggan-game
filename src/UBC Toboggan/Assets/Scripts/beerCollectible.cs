@@ -10,7 +10,6 @@ public class beerCollectible : MonoBehaviour
     public float magnitudeMultiplier = 0.25f;
     bool collected = false;
     float timer = 0f;
-    float yOffset = 0f;
     private Vector3 initialPos;
 
     void Start()
@@ -20,7 +19,7 @@ public class beerCollectible : MonoBehaviour
 
     void Update() {
         if (!collected) {
-            yOffset = (Mathf.Sin(timer*amount*speedMultiplier)+1)*magnitudeMultiplier;
+            float yOffset = (Mathf.Sin(timer*amount*speedMultiplier)+1)*magnitudeMultiplier;
             Vector3 newPos = new Vector3(initialPos.x,initialPos.y + yOffset,initialPos.z);
             transform.position = newPos;
             timer += Time.deltaTime;
