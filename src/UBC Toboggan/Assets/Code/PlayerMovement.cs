@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     public Animator fireAnimator;
 
     soundManager sm;
-    UIManager manager;
     BoostTimer boostTimer;
     ScoreManager scoreManager;
     float dX;
@@ -43,7 +42,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         boostTimer = new BoostTimer(boostTime);
-        manager = GetComponentInParent<UIManager>();
         jumpSpeed = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * body.gravityScale));
         scoreManager = scoreText.GetComponent<ScoreManager>();
     }
@@ -120,6 +118,7 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
+        // Put a try-catch on the if-else 
         if (headCollisionTrigger.IsTouching(collider))
         {
             boostTimer.pauseTimer();
@@ -128,6 +127,7 @@ public class PlayerMovement : MonoBehaviour
             canRotate = false;
             if (!collider.isTrigger)
             {
+                headCollisionTrigger.enabled = false;
                 StartCoroutine(LoadGameOverScreen());
             }
         } else if (touchingGroundTrigger.IsTouching(collider))
@@ -204,6 +204,6 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator LoadGameOverScreen()
     {
         yield return new WaitForSecondsRealtime(1.0f);
-        manager.ShowGameOverScreen();
+        UIManager.Instance.ShowGameOverScreen();
     }
 }

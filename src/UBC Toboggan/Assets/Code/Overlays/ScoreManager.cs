@@ -22,6 +22,8 @@ public class ScoreManager : MonoBehaviour
     PlayerMovement playerMovement;    
 
     void Start() {
+        UIManager.Instance.scoreManager = this;
+
         flipBonusText.SetActive(false);
         airBonusText.SetActive(false);
 
@@ -68,6 +70,22 @@ public class ScoreManager : MonoBehaviour
         float addedScore = seconds * airTimeMultiplier;
         airScore += addedScore;
         updateAirText();
+    }
+
+
+    public bool HideScore()
+    {
+        flipBonusText.SetActive(false);
+        airBonusText.SetActive(false);
+        scoreText.gameObject.SetActive(false);
+        return showingBonus;
+    }
+
+    public void ShowScore(bool wasShowingScore)
+    {
+        flipBonusText.SetActive(wasShowingScore);
+        airBonusText.SetActive(wasShowingScore);
+        scoreText.gameObject.SetActive(true);
     }
 
     void updateFlipText() {
