@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Farm2.unity
     guid: efad401dc786cc346a4c3d082e5f3eb6
+  - enabled: 1
+    path: Assets/Scenes/PauseMenu.unity
+    guid: 8a7521bd3d0594907ae6e6dd4f7cb1f5
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 7ea2dc1cdd28d48f7872c1c24e6df15e
+  - enabled: 1
+    path: Assets/Scenes/ResultsScreen.unity
+    guid: 4e1586495a9664d22960336c584ca6bc
   m_configObjects: {}

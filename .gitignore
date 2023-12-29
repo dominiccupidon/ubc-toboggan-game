@@ -75,3 +75,6 @@ src/UBC Toboggan/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 # Temporary auto-generated Android Assets
 src/UBC Toboggan/[Aa]ssets/[Ss]treamingAssets/aa.meta
 src/UBC Toboggan/[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# Exported sprites
+sprites/exports/*
