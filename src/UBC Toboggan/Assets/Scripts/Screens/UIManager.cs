@@ -57,7 +57,7 @@ public class UIManager : MonoBehaviour
             TogglePauseMenu();
        }
        
-       if (SceneManager.sceneCount > 1)
+       if (SceneManager.sceneCount > 1 || flags == OverlayFlags.GameOver)
        {
            if (Input.GetKeyDown(KeyCode.Q))
            {
@@ -106,10 +106,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowGameOverScreen()
     {
-        Time.timeScale = 0f;
         stopWatch.HideStopWatch();
         flags ^= OverlayFlags.GameOver;
-        SceneManager.LoadScene("GameOver", LoadSceneMode.Additive);
+        SceneManager.LoadScene("GameOver");
     }
 
     public void ShowResultsScreen()
@@ -126,7 +125,7 @@ public class UIManager : MonoBehaviour
     private IEnumerator RestartGame()
     {
         // Set timer back to 3 secs in full game
-        yield return new WaitForSecondsRealtime(0f);
+        yield return new WaitForSecondsRealtime(1f);
         Time.timeScale = 1f;
         for (int i = 0; i < SceneManager.sceneCount; i++) {
             Scene s = SceneManager.GetSceneAt(i);

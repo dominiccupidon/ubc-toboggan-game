@@ -118,7 +118,6 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        // Put a try-catch on the if-else 
         if (headCollisionTrigger.IsTouching(collider))
         {
             boostTimer.pauseTimer();
