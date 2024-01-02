@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     soundManager sm;
     BoostTimer boostTimer;
-    ScoreManager scoreManager;
+    scoreManager scoreManager;
     float dX;
     float dY;
     float jumpSpeed;
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         boostTimer = new BoostTimer(boostTime);
         jumpSpeed = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * body.gravityScale));
-        scoreManager = scoreText.GetComponent<ScoreManager>();
+        scoreManager = scoreText.GetComponent<scoreManager>();
     }
 
     // Update is called once per frame

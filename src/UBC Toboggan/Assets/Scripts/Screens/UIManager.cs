@@ -21,7 +21,7 @@ public class UIManager : MonoBehaviour
 
     public static UIManager Instance;
 
-    public ScoreManager scoreManager;
+    public scoreManager scoreManager;
     public StopWatch stopWatch;
 
     // Create an enum with the Scene names
