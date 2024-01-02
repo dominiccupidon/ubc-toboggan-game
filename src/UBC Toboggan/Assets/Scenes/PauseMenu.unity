@@ -183,8 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Audio
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
-  m_sharedMaterial: {fileID: -6895305332576258905, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
+  m_sharedMaterial: {fileID: -6895305332576258905, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -333,8 +333,8 @@ MonoBehaviour:
     to game, <voffset=-0.1em><sprite=\"R\" anim=\"0,2,6\"></voffset> to restart,
     \nand <voffset=-0.1em><sprite=\"Q\" anim=\"0,2,6\"></voffset> to quit game"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
-  m_sharedMaterial: {fileID: -6895305332576258905, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
+  m_sharedMaterial: {fileID: -6895305332576258905, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -656,8 +656,8 @@ MonoBehaviour:
     index=\"0\"></voffset></size> Jump <pos=50%><size=200%><voffset=-0.2em><sprite=\"S\"
     index=\"0\"></voffset></size> Rotate AntiClockwise\n\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
-  m_sharedMaterial: {fileID: -6895305332576258905, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
+  m_sharedMaterial: {fileID: -6895305332576258905, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 586467650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7354c4ed9a9b4c838314d872a058d92, type: 3}
+  m_Script: {fileID: 11500000, guid: b13c2179356b7574388185db687f58d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controlsTab: {fileID: 553982530}
@@ -1455,8 +1455,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Paused
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
-  m_sharedMaterial: {fileID: -6895305332576258905, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
+  m_sharedMaterial: {fileID: -6895305332576258905, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1678,8 +1678,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Controls
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
-  m_sharedMaterial: {fileID: -6895305332576258905, guid: 34967a6fce68e409da4078016303a7e0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
+  m_sharedMaterial: {fileID: -6895305332576258905, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

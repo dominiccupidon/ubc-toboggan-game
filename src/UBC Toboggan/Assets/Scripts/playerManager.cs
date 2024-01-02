@@ -38,8 +38,6 @@ public class playerManager : MonoBehaviour
     
     public Animator fire;
 
-    UIManager manager;
-
     bool boosting = false;
     bool alive = true;
     int numberOfSpins = 0;
@@ -57,8 +55,6 @@ public class playerManager : MonoBehaviour
     {
         scoreManagerScript = scoreSystem.GetComponent<scoreManager>();
         soundManagerScript = soundSystem.GetComponent<soundManager>();
-
-        manager = GetComponentInParent<UIManager>();
         
         rb.velocity = speedSave;
     }
@@ -191,6 +187,6 @@ public class playerManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(1.0f);
-        manager.ShowGameOverScreen();
+        UIManager.Instance.ShowGameOverScreen();
     }
 }

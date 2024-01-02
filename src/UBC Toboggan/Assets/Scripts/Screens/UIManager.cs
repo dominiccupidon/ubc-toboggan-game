@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance;
 
     public scoreManager scoreManager;
+    public soundManager soundManager;
+    public boostBarManager boostBarManager;
     public StopWatch stopWatch;
 
     // Create an enum with the Scene names
@@ -46,6 +48,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SceneManager.activeSceneChanged += PrepareForNextLevel;
     }
 
     // Update is called once per frame
@@ -69,16 +72,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void  QuitGame()
-    {    
-        Application.Quit();
-        // Code below will only run in the Unity Editor, not in the actual game
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.ExitPlaymode();
-        #endif
-    }
-
-
     void TogglePauseMenu()
     {
         if (flags <= OverlayFlags.Pause)
@@ -89,37 +82,56 @@ public class UIManager : MonoBehaviour
             if (isPaused)
             {
                 SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
+                wasBonusShowing = scoreManager.HideScore();
+                soundManager.pauseEffects();
+                stopWatch.HideStopWatch();
+                boostBarManager.ToggleBar(false);
             } else 
             {
                 SceneManager.UnloadSceneAsync("PauseMenu");
-            }
-
-            if (isPaused) {
-                wasBonusShowing = scoreManager.HideScore();
-                stopWatch.HideStopWatch();
-            } else {
                 scoreManager.ShowScore(wasBonusShowing);
+                soundManager.playEffects();
                 stopWatch.ShowStopWatch();
+                boostBarManager.ToggleBar(true);
             }
         }
     }
 
     public void ShowGameOverScreen()
     {
-        stopWatch.HideStopWatch();
         flags ^= OverlayFlags.GameOver;
-        SceneManager.LoadScene("GameOver");
+        if (flags == OverlayFlags.GameOver) {
+            stopWatch.HideStopWatch();
+            SceneManager.LoadScene("GameOver");
+        }
     }
 
     public void ShowResultsScreen()
     {
         // Create a enum for all the tags in the project
+        if (flags == OverlayFlags.Pause) {
+            SceneManager.UnloadSceneAsync("PauseMenu");
+            flags = OverlayFlags.None;
+        }
         flags ^= OverlayFlags.Results;
         if (flags == OverlayFlags.Results)
         {
             stopWatch.HideStopWatch();
+            boostBarManager.ToggleBar(false);
+            soundManager.pauseEffects();
+            scoreManager.HideScore();
             SceneManager.LoadScene("ResultsScreen", LoadSceneMode.Additive);
         }
+    }
+
+    private void PrepareForNextLevel(Scene current, Scene next)
+    {
+        flags = OverlayFlags.None;
+    }
+
+    void  QuitGame()
+    {
+        SceneManager.LoadScene("HomeScreen");
     }
     
     private IEnumerator RestartGame()
@@ -134,6 +146,6 @@ public class UIManager : MonoBehaviour
             }
         }
         flags = OverlayFlags.None;
-        SceneManager.LoadScene("TestLevel");
+        SceneManager.LoadScene("Farm");
     }
 }

@@ -7,7 +7,7 @@ public class ResultsScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameObject prompt = GameObject.Find("Prompt - Q, R");
+        GameObject prompt = GameObject.Find("Prompt - Q,R");
         prompt.SetActive(UIManager.Instance.isFinalResultsScreen);  
     }
 

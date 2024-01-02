@@ -51,6 +51,8 @@ public class FinishLine : MonoBehaviour
             
             blackRenderer.color = new Color(1f,1f,1f, fadeAmount);
             if (timer > transitionTime) {
+                // Create a function to retrieve the scene corresponding
+                // to the next level
                 SceneManager.LoadScene("Farm2");
             }
         }
@@ -68,7 +70,6 @@ public class FinishLine : MonoBehaviour
     private IEnumerator LoadScene()
     {
         yield return new WaitForSecondsRealtime(0.5f);
-        UIManager manager = GetComponentInParent<UIManager>();
-        manager.ShowResultsScreen();
+        UIManager.Instance.ShowResultsScreen();
     }
 }
