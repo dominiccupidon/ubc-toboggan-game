@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst;
@@ -40,6 +41,8 @@ public class playerManager : MonoBehaviour
 
     UIManager manager;
 
+    // PlayerControls controls;
+
     bool boosting = false;
     bool alive = true;
     int numberOfSpins = 0;
@@ -55,6 +58,10 @@ public class playerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // setup controller support
+        // controls = new PlayerControls();
+        // controls.Gameplay.Boost += ctx => boost();
+
         scoreManagerScript = scoreSystem.GetComponent<scoreManager>();
         soundManagerScript = soundSystem.GetComponent<soundManager>();
 
@@ -62,6 +69,16 @@ public class playerManager : MonoBehaviour
         
         rb.velocity = speedSave;
     }
+
+    // void jump() {
+
+    // }
+
+    // void boost() {
+
+    // }
+
+    // void
 
     // Update is called once per frame
     void Update()
@@ -103,19 +120,17 @@ public class playerManager : MonoBehaviour
             }
 
             // ROTATE: test is a/d is pressed and rotate
-            if (Input.GetButton("Horizontal"))
+            if (Input.GetAxisRaw("Horizontal") != 0)
             {
-                rb.angularVelocity = rb.angularVelocity + angurlarAcceleration*Time.deltaTime*-Input.GetAxisRaw("Horizontal"); // try only in air
+                rb.angularVelocity = rb.angularVelocity + angurlarAcceleration*Time.deltaTime*-Input.GetAxis("Horizontal"); // try only in air
             }
             
             // JUMP: test if w/s is pressed, ignore s presses and trigger jump
             if (Input.GetButtonDown("Vertical"))
             {
-                if (Input.GetAxisRaw("Vertical") == 1 && grounded && boostAmount > 0)
+                if (Input.GetAxisRaw("Vertical") > 0 && grounded)
                 {
                     rb.AddRelativeForce(Vector3.up * jumpThrust);
-
-                    boostAmount -= jumpCost;
 
                     soundManagerScript.playSound(jumpAudio);
                 }
