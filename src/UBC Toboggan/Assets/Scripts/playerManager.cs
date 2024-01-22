@@ -23,6 +23,7 @@ public class playerManager : MonoBehaviour
     public float jumpCost = 0.5f;
     public float deathTime = 2f;
     public bool grounded = false;
+    public int hatRecoil = 1000;
     
     public AudioSource slideAudio;
     public AudioSource windAudio;
@@ -36,6 +37,9 @@ public class playerManager : MonoBehaviour
 
     public GameObject soundSystem;
     soundManager soundManagerScript;
+
+    public GameObject hatObject;
+    
     
     public Animator fire;
 
@@ -52,6 +56,8 @@ public class playerManager : MonoBehaviour
     float trickStartAngle = 0f;
     float airTime = 0f;
     int intAirTime = 0;
+
+    public bool wearingHat = false;
 
     public static Vector2 speedSave = new Vector2(0,0);
 
@@ -171,10 +177,16 @@ public class playerManager : MonoBehaviour
             soundManagerScript.playSound(slideAudio);
         }
         if (playerTrigger.IsTouching(collider) && collider.tag == "ground") {
-            alive = false;
-            fire.SetFloat("isBoosting", 0f);
-            boostAmount = 0f;
-            StartCoroutine(LoadGameOverScreen());
+            if (wearingHat) {
+                wearingHat = false;
+                setHatSprite(false);
+                rb.AddRelativeForce(Vector3.down * hatRecoil);
+            } else {
+                alive = false;
+                fire.SetFloat("isBoosting", 0f);
+                boostAmount = 0f;
+                StartCoroutine(LoadGameOverScreen());
+            }
         }
     }
     
@@ -200,6 +212,19 @@ public class playerManager : MonoBehaviour
         else {
             return false;
         }
+    }
+
+    public bool collectHat() {
+        if (wearingHat == false) {
+            wearingHat = true;
+            setHatSprite(true);
+            return true;
+        }
+        return false;
+    }
+
+    void setHatSprite(bool displaying) {
+        hatObject.GetComponent<SpriteRenderer>().enabled = displaying;
     }
 
     private IEnumerator LoadGameOverScreen()
