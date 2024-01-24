@@ -146,7 +146,7 @@ public class playerManager : MonoBehaviour
         }
     }
 
-    // handles collisions with landing on the ground or getting killed by ground or falling in pit
+    // handles collisions with landing on the ground or getting killed by ground or falling in a pit
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (skiTrigger.IsTouching(collider) && collider.tag == "ground")
@@ -205,4 +205,4 @@ public class playerManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(1.0f);
         manager.ShowGameOverScreen();
     }
-}
+

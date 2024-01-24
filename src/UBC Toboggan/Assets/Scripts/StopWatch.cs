@@ -28,7 +28,7 @@ public class StopWatch : MonoBehaviour
             if (secondsElapsed > 60) // Consider setting the limit to 7.5 minutes (450 seconds)
             {
                 isTimerRunning = false;
-                //Application.Quit(); // Add logic to transition to a game over screen;
+           
                 StartCoroutine(LoadGameOverScreen()); 
             }
             displayTime();
