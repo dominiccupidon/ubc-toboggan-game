@@ -204,5 +204,7 @@ public class playerManager : MonoBehaviour
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(1.0f);
         manager.ShowGameOverScreen();
+
+    }
     }
 
