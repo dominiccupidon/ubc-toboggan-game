@@ -59,7 +59,7 @@ public class playerManager : MonoBehaviour
 
     public bool wearingHat = false;
 
-    public static Vector2 speedSave = new Vector2(0,0);
+    public Vector2 defaultVelocity = new Vector2(0,0);
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +73,7 @@ public class playerManager : MonoBehaviour
 
         manager = GetComponentInParent<UIManager>();
         
-        rb.velocity = speedSave;
+        rb.velocity = defaultVelocity;
     }
 
     // void jump() {
@@ -90,7 +90,6 @@ public class playerManager : MonoBehaviour
     void Update()
     {
         if (alive) {
-            speedSave = rb.velocity;
             // update current player angle
             currentEulerAngle = transform.eulerAngles.z;
             // test for player passing the 360 mark
