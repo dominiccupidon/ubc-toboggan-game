@@ -17,6 +17,7 @@ public class soundManager : MonoBehaviour
     Rigidbody2D rb;
     playerManager playerManagerScript;
 
+    public bool wasEffectVolumeChangedDuringPause = false;
     float savedEffectVolume = 1f;
     float effectVolumeBeforePause = 1f;
 
@@ -62,7 +63,9 @@ public class soundManager : MonoBehaviour
     }
 
     public void playEffects() {
-        changeEffectVolume(effectVolumeBeforePause);
+        float value = wasEffectVolumeChangedDuringPause ? savedEffectVolume : effectVolumeBeforePause;
+        changeEffectVolume(value);
+        wasEffectVolumeChangedDuringPause = false;
     }
 
     // float 0 to 1
