@@ -128,6 +128,7 @@ public class playerManager : MonoBehaviour
             if (Input.GetAxisRaw("Horizontal") != 0)
             {
                 rb.angularVelocity = rb.angularVelocity + angurlarAcceleration*Time.deltaTime*-Input.GetAxis("Horizontal"); // try only in air
+                Debug.Log(Input.GetAxis("Horizontal"));
             }
             
             // JUMP: test if w/s is pressed, ignore s presses and trigger jump
