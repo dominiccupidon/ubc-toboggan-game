@@ -25,7 +25,7 @@ public class StopWatch : MonoBehaviour
         if (isTimerRunning)
         {
             secondsElapsed += Time.deltaTime;
-            if (secondsElapsed > 60) // Consider setting the limit to 7.5 minutes (450 seconds)
+            if (secondsElapsed > 60) 
             {
                 isTimerRunning = false;
            

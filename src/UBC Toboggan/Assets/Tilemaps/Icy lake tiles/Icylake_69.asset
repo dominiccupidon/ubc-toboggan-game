@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Icylake_69
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -392374159, guid: 31ddd3cc13e735e4082edfaa7a58983b, type: 3}
+  m_Sprite: {fileID: -264841809, guid: 31ddd3cc13e735e4082edfaa7a58983b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

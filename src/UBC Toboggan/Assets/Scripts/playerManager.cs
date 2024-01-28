@@ -157,23 +157,19 @@ public class playerManager : MonoBehaviour
             slideAudio.volume = 0f;
             soundManagerScript.playSound(slideAudio);
         }
-        if (playerTrigger.IsTouching(collider) && collider.tag == "ground")
-        {
+        if ((playerTrigger.IsTouching(collider) && collider.tag == "ground") || (skiTrigger.IsTouching(collider) && collider.tag == "pit"))
+        { 
+        
             alive = false;
             fire.SetFloat("isBoosting", 0f);
             boostAmount = 0f;
             StartCoroutine(LoadGameOverScreen());
         }
-        if (skiTrigger.IsTouching(collider) && collider.tag == "pit")
-        {
-            alive = false;
-            fire.SetFloat("isBoosting", 0f);
-            boostAmount = 0f;
-            StartCoroutine(LoadGameOverScreen());
-        }
+  
+     
     }
 
-    // 
+    
     
     // handles leaving the ground
     void OnTriggerExit2D(Collider2D collider) {
