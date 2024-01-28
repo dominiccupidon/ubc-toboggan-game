@@ -20,7 +20,6 @@ public class soundManager : MonoBehaviour
     float savedEffectVolume = 1f;
     float effectVolumeBeforePause = 1f;
 
-    public FinishLine finishScript;
 
     void Start() {
         rb = player.GetComponent<Rigidbody2D>();
