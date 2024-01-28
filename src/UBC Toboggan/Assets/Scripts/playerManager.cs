@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst;
@@ -22,6 +23,7 @@ public class playerManager : MonoBehaviour
     public float jumpCost = 0.5f;
     public float deathTime = 2f;
     public bool grounded = false;
+    public int hatRecoil = 1000;
     
     public AudioSource slideAudio;
     public AudioSource windAudio;
@@ -35,10 +37,15 @@ public class playerManager : MonoBehaviour
 
     public GameObject soundSystem;
     soundManager soundManagerScript;
+
+    public GameObject hatObject;
+    
     
     public Animator fire;
 
     UIManager manager;
+
+    // PlayerControls controls;
 
     bool boosting = false;
     bool alive = true;
@@ -50,24 +57,39 @@ public class playerManager : MonoBehaviour
     float airTime = 0f;
     int intAirTime = 0;
 
-    public static Vector2 speedSave = new Vector2(0,0);
+    public bool wearingHat = false;
+
+    public Vector2 defaultVelocity = new Vector2(0,0);
 
     // Start is called before the first frame update
     void Start()
     {
+        // setup controller support
+        // controls = new PlayerControls();
+        // controls.Gameplay.Boost += ctx => boost();
+
         scoreManagerScript = scoreSystem.GetComponent<scoreManager>();
         soundManagerScript = soundSystem.GetComponent<soundManager>();
 
         manager = GetComponentInParent<UIManager>();
         
-        rb.velocity = speedSave;
+        rb.velocity = defaultVelocity;
     }
+
+    // void jump() {
+
+    // }
+
+    // void boost() {
+
+    // }
+
+    // void
 
     // Update is called once per frame
     void Update()
     {
         if (alive) {
-            speedSave = rb.velocity;
             // update current player angle
             currentEulerAngle = transform.eulerAngles.z;
             // test for player passing the 360 mark
@@ -103,19 +125,18 @@ public class playerManager : MonoBehaviour
             }
 
             // ROTATE: test is a/d is pressed and rotate
-            if (Input.GetButton("Horizontal"))
+            if (Input.GetAxisRaw("Horizontal") != 0)
             {
-                rb.angularVelocity = rb.angularVelocity + angurlarAcceleration*Time.deltaTime*-Input.GetAxisRaw("Horizontal"); // try only in air
+                rb.angularVelocity = rb.angularVelocity + angurlarAcceleration*Time.deltaTime*-Input.GetAxis("Horizontal"); // try only in air
+                Debug.Log(Input.GetAxis("Horizontal"));
             }
             
             // JUMP: test if w/s is pressed, ignore s presses and trigger jump
             if (Input.GetButtonDown("Vertical"))
             {
-                if (Input.GetAxisRaw("Vertical") == 1 && grounded && boostAmount > 0)
+                if (Input.GetAxisRaw("Vertical") > 0 && grounded)
                 {
                     rb.AddRelativeForce(Vector3.up * jumpThrust);
-
-                    boostAmount -= jumpCost;
 
                     soundManagerScript.playSound(jumpAudio);
                 }
@@ -156,10 +177,16 @@ public class playerManager : MonoBehaviour
             soundManagerScript.playSound(slideAudio);
         }
         if (playerTrigger.IsTouching(collider) && collider.tag == "ground") {
-            alive = false;
-            fire.SetFloat("isBoosting", 0f);
-            boostAmount = 0f;
-            StartCoroutine(LoadGameOverScreen());
+            if (wearingHat) {
+                wearingHat = false;
+                setHatSprite(false);
+                rb.AddRelativeForce(Vector3.down * hatRecoil);
+            } else {
+                alive = false;
+                fire.SetFloat("isBoosting", 0f);
+                boostAmount = 0f;
+                StartCoroutine(LoadGameOverScreen());
+            }
         }
     }
     
@@ -185,6 +212,19 @@ public class playerManager : MonoBehaviour
         else {
             return false;
         }
+    }
+
+    public bool collectHat() {
+        if (wearingHat == false) {
+            wearingHat = true;
+            setHatSprite(true);
+            return true;
+        }
+        return false;
+    }
+
+    void setHatSprite(bool displaying) {
+        hatObject.GetComponent<SpriteRenderer>().enabled = displaying;
     }
 
     private IEnumerator LoadGameOverScreen()
