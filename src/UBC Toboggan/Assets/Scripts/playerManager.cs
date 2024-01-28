@@ -167,15 +167,25 @@ public class playerManager : MonoBehaviour
         }
     }
 
-    // handles collisions with landing on the ground or getting killed by ground
-    void OnTriggerEnter2D(Collider2D collider) {
-        if (skiTrigger.IsTouching(collider) && collider.tag == "ground") {
+    // handles collisions with landing on the ground or getting killed by ground or falling in a pit
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (skiTrigger.IsTouching(collider) && collider.tag == "ground")
+        {
             grounded = true;
             intAirTime = 0;
             airTime = 0f;
             slideAudio.volume = 0f;
             soundManagerScript.playSound(slideAudio);
         }
+        if (skiTrigger.IsTouching(collider) && collider.tag == "pit")
+        {
+            alive = false;
+            fire.SetFloat("isBoosting", 0f);
+            boostAmount = 0f;
+            StartCoroutine(LoadGameOverScreen());
+        }
+
         if (playerTrigger.IsTouching(collider) && collider.tag == "ground") {
             if (wearingHat) {
                 wearingHat = false;
@@ -232,5 +242,7 @@ public class playerManager : MonoBehaviour
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(1.0f);
         manager.ShowGameOverScreen();
+
     }
-}
+    }
+
