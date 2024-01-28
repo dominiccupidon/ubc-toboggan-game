@@ -21,6 +21,9 @@ public class scoreManager : MonoBehaviour
 
     playerManager playerManagerScript;
 
+    public GameObject finishLine;
+    FinishLine finishScript;
+
     void Start() {
         flipBonusText.SetActive(false);
         airBonusText.SetActive(false);
@@ -28,13 +31,14 @@ public class scoreManager : MonoBehaviour
         score = 0;
 
         playerManagerScript = player.GetComponent<playerManager>();
+        finishScript = finishLine.GetComponent<FinishLine>();
     }
 
     void Update() {
         scoreText.text = score.ToString();
 
         // begin showing score text when a point is gained in the air
-        if (!playerManagerScript.grounded && !showingBonus && (flipScore > 0f || airScore > 0f)) {
+        if (!playerManagerScript.grounded && !showingBonus && (flipScore > 0f || airScore > 0f) && !finishScript.levelEndTriggered) {
             flipBonusText.SetActive(true);
             airBonusText.SetActive(true);
             showingBonus = true;

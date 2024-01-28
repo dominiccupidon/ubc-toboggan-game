@@ -19,4 +19,12 @@ public class MainMenu : MonoBehaviour
             UnityEditor.EditorApplication.ExitPlaymode();
         #endif
     }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            newGame();
+        }
+    }
 }

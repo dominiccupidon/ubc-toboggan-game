@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Return))
+       if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Fire3"))
        {
             isPaused = !isPaused;
             TogglePauseMenu();
@@ -39,12 +39,12 @@ public class UIManager : MonoBehaviour
        
        if (gameOverScreen.activeInHierarchy || pauseMenu.activeInHierarchy || resultsScreen.activeInHierarchy)
        {
-           if (Input.GetKeyDown(KeyCode.Q))
+           if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Fire1"))
            {
                 // QuitGame();
                 Time.timeScale = 1f;
                 SceneManager.LoadScene("HomeScreen");
-           } else if (Input.GetKeyDown(KeyCode.R))
+           } else if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Fire2"))
            {
                 // StartCoroutine(RestartGame());
                 Time.timeScale = 1f;
