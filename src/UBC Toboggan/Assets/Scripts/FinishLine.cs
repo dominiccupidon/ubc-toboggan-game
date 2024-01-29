@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class FinishLine : MonoBehaviour
 {
     public Collider2D triggerLevelEnd;
-    bool levelEndTriggered = false;
+    public bool levelEndTriggered = false;
     public GameObject cam;
     public cameraFollow camScript;
     public GameObject blackFade;

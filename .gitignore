@@ -76,5 +76,8 @@ src/UBC Toboggan/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 src/UBC Toboggan/[Aa]ssets/[Ss]treamingAssets/aa.meta
 src/UBC Toboggan/[Aa]ssets/[Ss]treamingAssets/aa/*
 
-# Exported sprites
+# Exported Sprite work
 sprites/exports/*
+
+# Vim Files
+*.swp

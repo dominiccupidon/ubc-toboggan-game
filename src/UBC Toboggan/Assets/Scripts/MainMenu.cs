@@ -71,4 +71,12 @@ public class MainMenu : MonoBehaviour
         StopCoroutine(coroutine);
         SceneManager.LoadScene("Farm");
     }
+    
+    void Update()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            newGame();
+        }
+    }
 }

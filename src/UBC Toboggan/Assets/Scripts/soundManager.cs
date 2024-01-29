@@ -21,6 +21,7 @@ public class soundManager : MonoBehaviour
     float savedEffectVolume = 1f;
     float effectVolumeBeforePause = 1f;
 
+
     void Start() {
         UIManager.Instance.soundManager = this;
         rb = player.GetComponent<Rigidbody2D>();

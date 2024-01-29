@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst;
@@ -22,6 +23,7 @@ public class playerManager : MonoBehaviour
     public float jumpCost = 0.5f;
     public float deathTime = 2f;
     public bool grounded = false;
+    public int hatRecoil = 1000;
     
     public AudioSource slideAudio;
     public AudioSource windAudio;
@@ -35,6 +37,9 @@ public class playerManager : MonoBehaviour
 
     public GameObject soundSystem;
     soundManager soundManagerScript;
+
+    public GameObject hatObject;
+    
     
     public Animator fire;
 
@@ -48,16 +53,32 @@ public class playerManager : MonoBehaviour
     float airTime = 0f;
     int intAirTime = 0;
 
-    public static Vector2 speedSave = new Vector2(0,0);
+    public bool wearingHat = false;
+
+    public Vector2 defaultVelocity = new Vector2(0,0);
 
     // Start is called before the first frame update
     void Start()
     {
+        // setup controller support
+        // controls = new PlayerControls();
+        // controls.Gameplay.Boost += ctx => boost();
+
         scoreManagerScript = scoreSystem.GetComponent<scoreManager>();
         soundManagerScript = soundSystem.GetComponent<soundManager>();
         
-        rb.velocity = speedSave;
+        rb.velocity = defaultVelocity;
     }
+
+    // void jump() {
+
+    // }
+
+    // void boost() {
+
+    // }
+
+    // void
 
     // Update is called once per frame
     void Update()
@@ -99,19 +120,18 @@ public class playerManager : MonoBehaviour
             }
 
             // ROTATE: test is a/d is pressed and rotate
-            if (Input.GetButton("Horizontal"))
+            if (Input.GetAxisRaw("Horizontal") != 0)
             {
-                rb.angularVelocity = rb.angularVelocity + angurlarAcceleration*Time.deltaTime*-Input.GetAxisRaw("Horizontal"); // try only in air
+                rb.angularVelocity = rb.angularVelocity + angurlarAcceleration*Time.deltaTime*-Input.GetAxis("Horizontal"); // try only in air
+                Debug.Log(Input.GetAxis("Horizontal"));
             }
             
             // JUMP: test if w/s is pressed, ignore s presses and trigger jump
             if (Input.GetButtonDown("Vertical"))
             {
-                if (Input.GetAxisRaw("Vertical") == 1 && grounded && boostAmount > 0)
+                if (Input.GetAxisRaw("Vertical") > 0 && grounded)
                 {
                     rb.AddRelativeForce(Vector3.up * jumpThrust);
-
-                    boostAmount -= jumpCost;
 
                     soundManagerScript.playSound(jumpAudio);
                 }
@@ -142,20 +162,36 @@ public class playerManager : MonoBehaviour
         }
     }
 
-    // handles collisions with landing on the ground or getting killed by ground
-    void OnTriggerEnter2D(Collider2D collider) {
-        if (skiTrigger.IsTouching(collider) && collider.tag == "ground") {
+    // handles collisions with landing on the ground or getting killed by ground or falling in a pit
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (skiTrigger.IsTouching(collider) && collider.tag == "ground")
+        {
             grounded = true;
             intAirTime = 0;
             airTime = 0f;
             slideAudio.volume = 0f;
             soundManagerScript.playSound(slideAudio);
         }
-        if (playerTrigger.IsTouching(collider) && collider.tag == "ground") {
+        if (skiTrigger.IsTouching(collider) && collider.tag == "pit")
+        {
             alive = false;
             fire.SetFloat("isBoosting", 0f);
             boostAmount = 0f;
             StartCoroutine(LoadGameOverScreen());
+        }
+
+        if (playerTrigger.IsTouching(collider) && collider.tag == "ground") {
+            if (wearingHat) {
+                wearingHat = false;
+                setHatSprite(false);
+                rb.AddRelativeForce(Vector3.down * hatRecoil);
+            } else {
+                alive = false;
+                fire.SetFloat("isBoosting", 0f);
+                boostAmount = 0f;
+                StartCoroutine(LoadGameOverScreen());
+            }
         }
     }
     
@@ -183,6 +219,19 @@ public class playerManager : MonoBehaviour
         }
     }
 
+    public bool collectHat() {
+        if (wearingHat == false) {
+            wearingHat = true;
+            setHatSprite(true);
+            return true;
+        }
+        return false;
+    }
+
+    void setHatSprite(bool displaying) {
+        hatObject.GetComponent<SpriteRenderer>().enabled = displaying;
+    }
+
     private IEnumerator LoadGameOverScreen()
     {
         Time.timeScale = 0f;
@@ -190,3 +239,4 @@ public class playerManager : MonoBehaviour
         UIManager.Instance.ShowGameOverScreen();
     }
 }
+

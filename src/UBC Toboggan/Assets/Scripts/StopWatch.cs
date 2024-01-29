@@ -8,12 +8,16 @@ public class StopWatch : MonoBehaviour
     private float secondsElapsed;
     private bool isTimerRunning;
     public Text clock;
+
+    UIManager manager;
+
     // Start is called before the first frame update
     void Start()
     {
         UIManager.Instance.stopWatch = this;
         secondsElapsed = 0f;
         isTimerRunning = true;
+        manager = GetComponentInParent<UIManager>();
     }
 
     // Update is called once per frame
@@ -22,10 +26,11 @@ public class StopWatch : MonoBehaviour
         if (isTimerRunning)
         {
             secondsElapsed += Time.deltaTime;
-            if (secondsElapsed > 90) // Consider setting the limit to 7.5 minutes (450 seconds)
+            if (secondsElapsed > 60) 
             {
                 isTimerRunning = false;
-                Application.Quit(); // Add logic to transition to a game over screen;
+           
+                StartCoroutine(LoadGameOverScreen()); 
             }
             displayTime();
         }    
@@ -39,13 +44,10 @@ public class StopWatch : MonoBehaviour
         clock.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
     }
 
-    public void HideStopWatch()
+    private IEnumerator LoadGameOverScreen()
     {
-        gameObject.SetActive(false);
-    }
-
-    public void ShowStopWatch()
-    {
-        gameObject.SetActive(true);
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(1.0f);
+        manager.ShowGameOverScreen();
     }
 }

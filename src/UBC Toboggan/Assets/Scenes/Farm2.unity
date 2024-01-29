@@ -388,6 +388,7 @@ MonoBehaviour:
   jumpCost: 0.5
   deathTime: 1
   grounded: 0
+  hatRecoil: 1000
   slideAudio: {fileID: 1170566414}
   windAudio: {fileID: 305483153}
   boostAudio: {fileID: 478079430}
@@ -396,7 +397,10 @@ MonoBehaviour:
   jumpAudio: {fileID: 1770035406}
   scoreSystem: {fileID: 739642320}
   soundSystem: {fileID: 1716099846}
+  hatObject: {fileID: 0}
   fire: {fileID: 315887357}
+  wearingHat: 0
+  defaultVelocity: {x: 10, y: 0}
 --- !u!70 &233620682
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -1352,6 +1356,7 @@ MonoBehaviour:
   followSpeed: 10
   yOffset: 0
   xOffset: 3
+  minX: 37
   target: {fileID: 233620679}
 --- !u!1 &739642320
 GameObject:
