@@ -56,7 +56,6 @@ public class UIManager : MonoBehaviour
     {
        if (Input.GetKeyDown(KeyCode.Return))
        {
-            flags ^= OverlayFlags.Pause;
             TogglePauseMenu();
        }
        
@@ -76,8 +75,9 @@ public class UIManager : MonoBehaviour
     {
         if (flags <= OverlayFlags.Pause)
         {
-            // Setting Time.timeScale to 0 freezes any physics and animations that use Time.deltaTime
+            flags ^= OverlayFlags.Pause;
             bool isPaused = Convert.ToBoolean(flags);
+            // Setting Time.timeScale to 0 freezes any physics and animations that use Time.deltaTime
             Time.timeScale = isPaused ? 0f : 1f;
             if (isPaused)
             {
@@ -109,6 +109,7 @@ public class UIManager : MonoBehaviour
     public void ShowResultsScreen()
     {
         // Create a enum for all the tags in the project
+        Debug.Log(flags);
         if (flags == OverlayFlags.Pause) {
             SceneManager.UnloadSceneAsync("PauseMenu");
             flags = OverlayFlags.None;
@@ -126,12 +127,14 @@ public class UIManager : MonoBehaviour
 
     private void PrepareForNextLevel(Scene current, Scene next)
     {
-        flags = OverlayFlags.None;
+        flags = next.name == "GameOver" ? OverlayFlags.GameOver : OverlayFlags.None;
     }
 
     void  QuitGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene("HomeScreen");
+        Destroy(gameObject);
     }
     
     private IEnumerator RestartGame()

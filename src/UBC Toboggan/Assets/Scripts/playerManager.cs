@@ -62,7 +62,7 @@ public class playerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (alive) {
+        if (alive && Time.timeScale == 1f) {
             speedSave = rb.velocity;
             // update current player angle
             currentEulerAngle = transform.eulerAngles.z;

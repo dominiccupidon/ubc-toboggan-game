@@ -797,10 +797,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\n<pos=5%>The sled will naturally slide down the hill due \n<pos=5%>to
-    gravity.\n\n<size=120%><pos=5%>On the Ground <pos=50%>In the Air</size>\n<pos=5%><size=200%><voffset=-0.2em><sprite=\"D\"
-    index=\"0\"></voffset></size> Boost <pos=50%><size=200%><voffset=-0.2em><sprite=\"W\"
+    gravity.\n\n<size=120%><pos=5%>On the Ground <pos=50%>In the Air</size>\n<pos=5%><size=200%><voffset=-0.2em><sprite=\"W\"
+    index=\"0\"></voffset></size> Jump <pos=50%><size=200%><voffset=-0.2em><sprite=\"D\"
     index=\"0\"></voffset></size> Rotate Clockwise\n<pos=5%><size=200%><voffset=-0.2em><sprite=\"SPACE\"
-    index=\"0\"></voffset></size> Jump <pos=50%><size=200%><voffset=-0.2em><sprite=\"S\"
+    index=\"0\"></voffset></size> Boost <pos=50%><size=200%><voffset=-0.2em><sprite=\"A\"
     index=\"0\"></voffset></size> Rotate AntiClockwise\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ac38b28c196b8754684ded8848deb82c, type: 2}
