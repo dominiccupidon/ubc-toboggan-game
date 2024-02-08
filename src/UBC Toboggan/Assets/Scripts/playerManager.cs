@@ -18,7 +18,7 @@ public class playerManager : MonoBehaviour
     public float thrust = 2f;
     public float jumpThrust = 10f;
     public float maxBoost = 10f;
-    public float boostAmount = 10f;
+    public static float boostAmount = 0f;
     public float boostPerSecond = 1f;
     public float jumpCost = 0.5f;
     public float deathTime = 2f;
@@ -182,7 +182,6 @@ public class playerManager : MonoBehaviour
         {
             alive = false;
             fire.SetFloat("isBoosting", 0f);
-            boostAmount = 0f;
             StartCoroutine(LoadGameOverScreen());
         }
 
@@ -194,7 +193,6 @@ public class playerManager : MonoBehaviour
             } else {
                 alive = false;
                 fire.SetFloat("isBoosting", 0f);
-                boostAmount = 0f;
                 StartCoroutine(LoadGameOverScreen());
             }
         }
