@@ -20,7 +20,7 @@ public class boostLevelManager : MonoBehaviour
     void Update()
     { 
         playerManager playerManagerScript = player.GetComponent<playerManager>();
-        float boostAmount = playerManagerScript.boostAmount;
+        float boostAmount = playerManager.boostAmount;
         float maxBoost = playerManagerScript.maxBoost;
         float boostBarOffset = minBoostPosition * (1-boostAmount/maxBoost);
         Vector3 newPos = new Vector3(boostBar.position.x, boostBar.position.y + boostBarOffset, transform.position.z);
