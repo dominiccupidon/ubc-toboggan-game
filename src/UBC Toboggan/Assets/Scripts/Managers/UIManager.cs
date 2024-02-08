@@ -59,17 +59,17 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Fire3"))
+       if (Input.GetKeyDown(KeyCode.Return) || (Input.GetButtonDown("Fire3") && isControllerConnected))
        {
             TogglePauseMenu();
        }
        
        if (SceneManager.sceneCount > 1 || flags == OverlayFlags.GameOver)
        {
-           if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Fire1"))
+           if (Input.GetKeyDown(KeyCode.Q) || (Input.GetButtonDown("Fire1") && isControllerConnected))
            {
                 QuitGame();
-           } else if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Fire2"))
+           } else if (Input.GetKeyDown(KeyCode.R) || (Input.GetButtonDown("Fire2") && isControllerConnected))
            {
                 StartCoroutine(RestartGame());
            }

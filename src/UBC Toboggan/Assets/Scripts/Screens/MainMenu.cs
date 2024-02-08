@@ -45,7 +45,7 @@ public class MainMenu : MonoBehaviour
     void Update()
     {
         // Enter 
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Fire2"))
+        if (Input.GetKeyDown(KeyCode.Return) || (Input.GetButtonDown("Fire2") && isUsingController))
         {
             if (skipPrompt.activeInHierarchy) 
             {
@@ -58,7 +58,8 @@ public class MainMenu : MonoBehaviour
 
         // Create check that prevents this code from running when the user has started
         // a new game
-        if ((Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Fire1")) && !controlPanel.activeInHierarchy)
+        if ((Input.GetKeyDown(KeyCode.Q) || (Input.GetButtonDown("Fire1") && isUsingController)) 
+            && !controlPanel.activeInHierarchy)
         {
             exitToDesktop();
         }
