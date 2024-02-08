@@ -33,6 +33,11 @@ public class UIManager : MonoBehaviour
         get { return SceneManager.GetActiveScene().name == "TestLevel"; }
     }
 
+    public bool isControllerConnected
+    {
+        get { return Input.GetJoystickNames().Length > 0; }
+    }
+
     private void Awake()
     {
         if (Instance != null)
@@ -54,17 +59,17 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       if (Input.GetKeyDown(KeyCode.Return))
+       if (Input.GetKeyDown(KeyCode.Return) || Input.GetButtonDown("Fire3"))
        {
             TogglePauseMenu();
        }
        
        if (SceneManager.sceneCount > 1 || flags == OverlayFlags.GameOver)
        {
-           if (Input.GetKeyDown(KeyCode.Q))
+           if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Fire1"))
            {
                 QuitGame();
-           } else if (Input.GetKeyDown(KeyCode.R))
+           } else if (Input.GetKeyDown(KeyCode.R) || Input.GetButtonDown("Fire2"))
            {
                 StartCoroutine(RestartGame());
            }

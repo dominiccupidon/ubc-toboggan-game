@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3ab952c364db548f4b85f5d021d1bddf
+guid: 1b529b6865622438b94b5c782e9b1637
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,64 +117,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ARROWDOWN_0
+      name: Triangle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 19
-        height: 21
-      alignment: 6
+        width: 16
+        height: 16
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30350dcdb7f0840328ad66e3425701c9
-      internalID: 1684775410
+      spriteID: 1230b5c02f9684b42ab40105bb92dc40
+      internalID: -629241978
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARROWDOWN_1
+      name: Triangle_1
       rect:
         serializedVersion: 2
-        x: 19
+        x: 16
         y: 0
-        width: 19
-        height: 21
-      alignment: 6
+        width: 16
+        height: 16
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8d4e4c5ad56f4560a3684c6ede71d9e
-      internalID: -1591113720
+      spriteID: 453b9447d9f0c4665996886dd6ad4679
+      internalID: -462673475
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARROWDOWN_2
+      name: Triangle_2
       rect:
         serializedVersion: 2
-        x: 38
+        x: 32
         y: 0
-        width: 19
-        height: 21
-      alignment: 6
+        width: 16
+        height: 16
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c835b3e5a3ad4debb53be2d3670b04d
-      internalID: 253700145
+      spriteID: ccfdf81ba79de45a8ad2f5fc5783fc2b
+      internalID: -1086937605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Triangle_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 635fdfd8fa12d41edb1ea4649fe0c852
+      internalID: -174136423
       vertices: []
       indices: 
       edges: []
@@ -190,9 +211,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ARROWDOWN_0: 1684775410
-      ARROWDOWN_1: -1591113720
-      ARROWDOWN_2: 253700145
+      Triangle_0: -629241978
+      Triangle_1: -462673475
+      Triangle_2: -1086937605
+      Triangle_3: -174136423
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3ab952c364db548f4b85f5d021d1bddf
+guid: 47a0e1ba1d01c427bb4b3390700fc212
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -117,64 +117,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ARROWDOWN_0
+      name: Left_Stick_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 10
         y: 0
-        width: 19
-        height: 21
-      alignment: 6
-      pivot: {x: 0, y: 0}
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30350dcdb7f0840328ad66e3425701c9
-      internalID: 1684775410
+      spriteID: 95ee298cd165e439dbb81ec07f29014d
+      internalID: -1133427530
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARROWDOWN_1
+      name: Left_Stick_1
       rect:
         serializedVersion: 2
-        x: 19
+        x: 29
         y: 0
-        width: 19
-        height: 21
-      alignment: 6
-      pivot: {x: 0, y: 0}
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c8d4e4c5ad56f4560a3684c6ede71d9e
-      internalID: -1591113720
+      spriteID: f8f7c11fe6f4449b6888a6a913e44326
+      internalID: -854941134
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ARROWDOWN_2
+      name: Left_Stick_2
       rect:
         serializedVersion: 2
-        x: 38
+        x: 46
         y: 0
-        width: 19
-        height: 21
-      alignment: 6
-      pivot: {x: 0, y: 0}
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c835b3e5a3ad4debb53be2d3670b04d
-      internalID: 253700145
+      spriteID: 998b54588202446c98a18c64a0a14717
+      internalID: -686502774
       vertices: []
       indices: 
       edges: []
@@ -190,9 +190,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ARROWDOWN_0: 1684775410
-      ARROWDOWN_1: -1591113720
-      ARROWDOWN_2: 253700145
+      Left_Stick_0: -1133427530
+      Left_Stick_1: -854941134
+      Left_Stick_2: -686502774
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -44,6 +44,16 @@ public class StopWatch : MonoBehaviour
         clock.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
     }
 
+    public void HideStopWatch()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void ShowStopWatch()
+    {
+        gameObject.SetActive(true);
+    }
+
     private IEnumerator LoadGameOverScreen()
     {
         Time.timeScale = 0f;

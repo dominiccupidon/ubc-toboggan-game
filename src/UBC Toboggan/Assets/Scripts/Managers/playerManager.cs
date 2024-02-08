@@ -84,7 +84,6 @@ public class playerManager : MonoBehaviour
     void Update()
     {
         if (alive && Time.timeScale == 1f) {
-            speedSave = rb.velocity;
             // update current player angle
             currentEulerAngle = transform.eulerAngles.z;
             // test for player passing the 360 mark

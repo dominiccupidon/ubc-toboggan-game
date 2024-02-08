@@ -4,13 +4,12 @@ using UnityEngine;
 using Constants;
 using TMPro;
 
-public class ResultsScreen : MonoBehaviour
+public class GameOverScreen : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        GameObject prompt = GameObject.Find("Prompt - Q,R");
-        prompt.SetActive(UIManager.Instance.isFinalResultsScreen);  
+        GameObject prompt = GameObject.FindWithTag("Prompt");
         TMP_Text t = prompt.GetComponent<TMP_Text>();
         t.text = UIManager.Instance.isControllerConnected ? Prompts.GameOverControllerExitPrompt : Prompts.GameOverKeyboardExitPrompt;
     }
