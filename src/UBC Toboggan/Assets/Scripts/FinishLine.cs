@@ -53,7 +53,11 @@ public class FinishLine : MonoBehaviour
             if (timer > transitionTime) {
                 // Create a function to retrieve the scene corresponding
                 // to the next level
-                SceneManager.LoadScene("Farm2");
+                string level = UIManager.Instance.nextLevel;
+                if (level != "")
+                {
+                    SceneManager.LoadScene(level);
+                }
             }
         }
     }

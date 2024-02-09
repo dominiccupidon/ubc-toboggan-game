@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using Constants;
 
 public enum OverlayFlags 
 {
@@ -26,16 +26,34 @@ public class UIManager : MonoBehaviour
     public boostBarManager boostBarManager;
     public StopWatch stopWatch;
 
+    string currentLevel = Scenes.FirstLevel;
+
     // Create an enum with the Scene names
     // For actual game change the string to the enum corresponding with the scene for the final level
     public bool isFinalResultsScreen
     {
-        get { return SceneManager.GetActiveScene().name == "TestLevel"; }
+        get { return SceneManager.GetActiveScene().name == Scenes.FinalLevel; }
     }
 
     public bool isControllerConnected
     {
         get { return Input.GetJoystickNames().Length > 0; }
+    }
+
+    public string nextLevel
+    {
+        get {
+            if (currentLevel == Scenes.FirstLevel)
+            {
+                return Scenes.SecondLevel;
+            } else if (currentLevel == Scenes.SecondLevel) 
+            {
+                return Scenes.FinalLevel;
+            } else
+            {
+                return "";
+            }
+        }
     }
 
     private void Awake()
@@ -86,14 +104,14 @@ public class UIManager : MonoBehaviour
             Time.timeScale = isPaused ? 0f : 1f;
             if (isPaused)
             {
-                SceneManager.LoadScene("PauseMenu", LoadSceneMode.Additive);
+                SceneManager.LoadScene(Scenes.Pause, LoadSceneMode.Additive);
                 wasBonusShowing = scoreManager.HideScore();
                 soundManager.pauseEffects();
                 stopWatch.HideStopWatch();
                 boostBarManager.ToggleBar(false);
             } else 
             {
-                SceneManager.UnloadSceneAsync("PauseMenu");
+                SceneManager.UnloadSceneAsync(Scenes.Pause);
                 scoreManager.ShowScore(wasBonusShowing);
                 soundManager.playEffects();
                 stopWatch.ShowStopWatch();
@@ -107,7 +125,7 @@ public class UIManager : MonoBehaviour
         flags ^= OverlayFlags.GameOver;
         if (flags == OverlayFlags.GameOver) {
             stopWatch.HideStopWatch();
-            SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene(Scenes.GameOver);
         }
     }
 
@@ -116,7 +134,7 @@ public class UIManager : MonoBehaviour
         // Create a enum for all the tags in the project
         Debug.Log(flags);
         if (flags == OverlayFlags.Pause) {
-            SceneManager.UnloadSceneAsync("PauseMenu");
+            SceneManager.UnloadSceneAsync(Scenes.Pause);
             flags = OverlayFlags.None;
         }
         flags ^= OverlayFlags.Results;
@@ -126,19 +144,20 @@ public class UIManager : MonoBehaviour
             boostBarManager.ToggleBar(false);
             soundManager.pauseEffects();
             scoreManager.HideScore();
-            SceneManager.LoadScene("ResultsScreen", LoadSceneMode.Additive);
+            SceneManager.LoadScene(Scenes.Results, LoadSceneMode.Additive);
         }
     }
 
     private void PrepareForNextLevel(Scene current, Scene next)
     {
-        flags = next.name == "GameOver" ? OverlayFlags.GameOver : OverlayFlags.None;
+        flags = next.name == Scenes.GameOver ? OverlayFlags.GameOver : OverlayFlags.None;
+        currentLevel = next.name;
     }
 
     void  QuitGame()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("HomeScreen");
+        SceneManager.LoadScene(Scenes.Home);
         Destroy(gameObject);
     }
     
@@ -154,6 +173,6 @@ public class UIManager : MonoBehaviour
             }
         }
         flags = OverlayFlags.None;
-        SceneManager.LoadScene("Farm");
+        SceneManager.LoadScene(Scenes.FirstLevel);
     }
 }

@@ -116,7 +116,7 @@ public class MainMenu : MonoBehaviour
     public void LoadGame()
     {
         StopCoroutine(coroutine);
-        SceneManager.LoadScene("Farm");
+        SceneManager.LoadScene(Scenes.FirstLevel);
     }
     
 }
