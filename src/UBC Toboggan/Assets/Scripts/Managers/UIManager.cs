@@ -151,7 +151,7 @@ public class UIManager : MonoBehaviour
     private void PrepareForNextLevel(Scene current, Scene next)
     {
         flags = next.name == Scenes.GameOver ? OverlayFlags.GameOver : OverlayFlags.None;
-        currentLevel = next.name;
+        currentLevel = next.name != Scenes.GameOver ? next.name : currentLevel;
     }
 
     void  QuitGame()
@@ -173,6 +173,6 @@ public class UIManager : MonoBehaviour
             }
         }
         flags = OverlayFlags.None;
-        SceneManager.LoadScene(Scenes.FirstLevel);
+        SceneManager.LoadScene(currentLevel);
     }
 }

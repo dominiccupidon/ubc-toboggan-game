@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class scoreManager : MonoBehaviour
 {
-    public static float score = 0f;
+    float score = 0f;
     
     public Text scoreText;
     public GameObject flipBonusText;
@@ -89,6 +89,22 @@ public class scoreManager : MonoBehaviour
         flipBonusText.SetActive(wasShowingScore);
         airBonusText.SetActive(wasShowingScore);
         scoreText.gameObject.SetActive(true);
+    }
+
+    public float GetLevelScore()
+    {
+        float levelScore = score;
+        float cumulativeScore = PlayerPrefs.GetFloat("Score", 0) + levelScore;
+        PlayerPrefs.SetFloat("Score", cumulativeScore);
+        score = 0f;
+        return levelScore;
+    }
+
+    public float GetFinalScore()
+    {
+        float cumulativeScore = PlayerPrefs.GetFloat("Score", 0) + score;
+        PlayerPrefs.SetFloat("Score", cumulativeScore);
+        return cumulativeScore;
     }
 
     void updateFlipText() {

@@ -48,7 +48,7 @@ namespace Constants
     {
         public static string FirstLevel = "IcyMountain";
         public static string SecondLevel = "Icylake";
-        public static string FinalLevel = "Farm";
+        public static string FinalLevel = "Farm 1";
 
         public static string Home = "HomeScreen";
         public static string GameOver = "GameOver";
