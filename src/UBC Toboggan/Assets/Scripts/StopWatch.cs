@@ -14,6 +14,7 @@ public class StopWatch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UIManager.Instance.stopWatch = this;
         secondsElapsed = 0f;
         isTimerRunning = true;
         manager = GetComponentInParent<UIManager>();
@@ -41,6 +42,16 @@ public class StopWatch : MonoBehaviour
         float seconds = secondsElapsed % 60;
         float milliseconds = (secondsElapsed % 1) * 1000; 
         clock.text = string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+    }
+
+    public void HideStopWatch()
+    {
+        gameObject.SetActive(false);
+    }
+
+    public void ShowStopWatch()
+    {
+        gameObject.SetActive(true);
     }
 
     private IEnumerator LoadGameOverScreen()
